@@ -4,19 +4,35 @@
 
 .photograph-header {
     background-color: #FAFAFA;
-    height: 300px;
+    height: 313px;
     margin: 0 100px;
+}
+.detail-photographe {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center; /* Centrer horizontalement et verticalement */
+
+
 }
 .photographer-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
+    margin-left: 100px;
 
+}
+.dropdown-container {
+    margin: 100px;
 }
 .image-media {
     Width: 350px;
     Height: 300px;
+}
+.image-photographe {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
 }
 .contact_button {
     font-size: 20px;
@@ -84,3 +100,39 @@ form input {
     border: none;
     border-radius: 5px;
 }
+.detail h1 {
+    font-size: 64px;
+    color: rgb(211, 87, 60);
+}
+.detail span {
+    font-size: 24px;
+    color:rgba(144, 28, 28, 1)
+
+}
+.detail p {
+    font-size: 18px;
+}
+
+#options, option {
+    background-color:rgba(144, 28, 28, 1);
+    color: white;
+    width: 170px;
+    height: 69px;
+}
+ #options option {
+    background-color:rgba(144, 28, 28, 1);
+    color: white;
+    width: 170px;
+    height: 69px;
+    margin: 10px; /* Espace intérieur des options */
+ }
+
+.trie, option {
+    font-size: 18px;
+    font-weight: bold;
+
+}
+select {
+    margin-left: 20px;
+}
+

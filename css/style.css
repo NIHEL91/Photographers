@@ -11,7 +11,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 90px;
+    height: 157px;
 }
 
 h1 {
@@ -63,3 +63,6 @@ h1 {
   .country {
     color: #D3573C;
   }
+  a {
+    text-decoration: none;
+}
