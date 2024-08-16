@@ -1,9 +1,11 @@
 @import url("photographer.css");
 
-body {
+body {width: 1440px;
+    height: 1024px;
+    margin: 0 auto; /* Centre la page horizontalement */
     font-family: "DM Sans", sans-serif;
-    margin: 0;
 }
+
 
 
 header {
@@ -15,9 +17,8 @@ header {
 }
 
 h1 {
-    size:36px;
     color: #901C1C;
-    margin-right: 100px;
+    font-size: 36px;
 }
 
 .logo {
@@ -32,15 +33,14 @@ h1 {
     margin-top: 100px;
 }
 
-.fa-solid {
-    color: rgba(144, 28, 28, 1);
-}
+
+
 .photographer_section article {
-    justify-self: center;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center; /* Centre horizontalement le contenu de l'article */
+    text-align: center;
+    line-height: 0.8;
 }
 
 .photographer_section article h2 {
@@ -66,3 +66,9 @@ h1 {
   a {
     text-decoration: none;
 }
+
+a:visited {
+    color: black; 
+    text-decoration: none; /* Pour enlever le soulignement */
+}
+

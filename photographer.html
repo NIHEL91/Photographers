@@ -21,36 +21,59 @@
       </div>
 
       <div class="dropdown-container">
-        <label class="trie" for="options">Trier par:</label>
-        <select id="options" name="options">
+        <label class="trie" for="options">Trier par</label>
+        <select class="options" name="options">
             <option value="option1">Popularité</option>
             <option value="option2">Date</option>
             <option value="option3">Titre</option>
         </select>
       </div>
+
+   
       <div class="photographer-container">
       
       </div>
 
     </main>
     <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+      <div class="modal">
+        <header>
+          <h2 id="modalTitle">Contactez-moi</h2>
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+            <span class="closeStar">
+              <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la fenêtre" />
+            </span>
+            <div class="modal-body">
+              <form id="myForm">
+                <div class="formData">
+                  <label class="text-label" for="first" id="labelFirstName">Prénom</label>
+                  <input class="text-control" type="text" id="first" name="first" aria-labelledby="labelFirstName">
+                  <span class="error" id="errorFirst">Le prénom doit contenir au moins 2 caractères.</span>
+                </div>
+                <div class="formData">
+                  <label class="text-label" for="last"  id="labellastName">Nom</label>
+                  <input class="text-control" type="text" id="last" name="last" aria-labelledby="labellastName">
+                  <span class="error" id="errorLast">Le nom doit contenir au moins 2 caractères.</span>
+                </div>
+                <div class="formData">
+                  <label class="text-label" for="email" id="labelmail">E-mail</label>
+                  <input class="text-control" type="email" id="email" name="email" aria-required="true" aria-labelledby="labelmail">
+                  <span class="error" id="errorEmail">Veuillez entrer une adresse email valide.</span>
+                </div>
+                <div class="formData">
+                  <label class="text-label" for="message" id="labelmessage">Votre message</label>
+                  <input class="text-control" ty
+                  pe="date" id="message" name="message" aria-required="true" aria-labelledby="labelmessage">
+                </div>
+                <button class="contact_button">Envoyer</button>
+              </form>
+            </div>
+          </div>
+        </div>
+    
     <script   type="module" src="/scripts/pages/photographer.js"></script>
 
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script  type="module"  src="/scripts/utils/contactForm.js"></script> <!--type module indique au navigateur que le fichier est un module ecpascript permet l'utilisation de import et export--> 
     
   </body>
 </html>

@@ -3,14 +3,14 @@ import {getPhotographers} from '../pages/index.js';
 import {photographerMediaTemplate} from '../utils/photographersMedia.js';
 
 //pour récupérer le id depuis le url
-function getQueryParams() {
+export function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
     return {
         photographerId: parseInt(params.get('photographerId'))
     };
 }
 
-async function getMedia() {
+   async function getMedia() {
     const response = await fetch("../../data/photographers.json");
     const data = await response.json();
     const media = data.media;

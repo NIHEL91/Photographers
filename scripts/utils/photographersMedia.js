@@ -9,7 +9,7 @@ export function photographerMediaTemplate(data) {
             headerElement.classList.add('detail-photographe'); // Ajoute une classe pour appliquer le CSS
 
             const detailP = document.createElement('div');
-            detailP.classList.add('detail');
+            detailP.classList.add('photographer-profil');
 
             const buttonModal = document.createElement('div');
             buttonModal.classList.add('contact');
@@ -39,8 +39,9 @@ export function photographerMediaTemplate(data) {
 
 
             detailP.appendChild(h1);
-            detailP.appendChild(pTagline);
             detailP.appendChild(pLocation);
+
+            detailP.appendChild(pTagline);
             
             buttonModal.appendChild(button);
             headerElement.appendChild(detailP);
