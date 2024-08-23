@@ -195,3 +195,25 @@ select {
     transform: scale(0.7);
 }
 
+#total-likes {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: -1000;
+    border-radius: 5px;
+    background-color: rgba(219, 136, 118, 1);
+    Width:376px;
+    Height:89px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: -21px;
+    margin-right: 10px;
+}
+
+
+.totalLikesCount, .price {
+    font-size: 24px;
+    padding:13px;
+
+}

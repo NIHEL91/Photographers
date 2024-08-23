@@ -35,3 +35,23 @@ function closeModal() {
 modalBtn.forEach((btn) => btn.addEventListener("click", displayModal));
 closeStar.addEventListener("click", closeModal); //close star
 
+//Ajouter un écouteur d'événements pour soumettre le formulaire
+const myForm = document.getElementById("myForm");
+myForm.addEventListener("submit", (event) => {
+    event.preventDefault(); // Empêche le formulaire de se soumettre automatiquement
+
+    // Récupérer les valeurs des champs du formulaire
+    const firstName = document.getElementById("first").value;
+    const lastName = document.getElementById("last").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    // Logguer les informations dans la console
+    console.log("Prénom :", firstName);
+    console.log("Nom :", lastName);
+    console.log("Email :", email);
+    console.log("Message :", message);
+
+    // Fermer la modale après soumission (optionnel)
+    closeModal();
+});

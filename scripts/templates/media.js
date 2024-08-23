@@ -1,3 +1,5 @@
+
+//import { updateTotalLikes } from '../pages/photographer.js'; 
 ///Création les élements des photgraphes
 export function mediaTemplate(data) {
     const {  title, image, likes } = data;
@@ -39,23 +41,19 @@ export function mediaTemplate(data) {
         // Icône de like
         const icon = document.createElement('i');
         icon.classList.add('fa-solid', 'fa-heart');
-
+       
+        
         // Ajouter un événement au clic pour incrémenter les likes
         icon.addEventListener('click', () => {
             existLikes += 1;
             likeCount.textContent = existLikes;
+         //   updateTotalLikes();
+
      });
 
-        //div pour la totalité des likes en bas de page 
-        const totalLikes = document.createElement('div');
-        totalLikes.classList.add('total-likes');
-       
-       
-
-
+      
         likeContainer.appendChild(likeCount);
         likeContainer.appendChild(icon);
-
         text.appendChild(h2);
         text.appendChild(likeContainer);
 
