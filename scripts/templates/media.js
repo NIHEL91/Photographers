@@ -1,5 +1,5 @@
 
-//import { updateTotalLikes } from '../pages/photographer.js'; 
+import { updateTotalLikes } from '../pages/like.js'; 
 ///Création les élements des photgraphes
 export function mediaTemplate(data) {
     const {  title, image, likes } = data;
@@ -47,7 +47,7 @@ export function mediaTemplate(data) {
         icon.addEventListener('click', () => {
             existLikes += 1;
             likeCount.textContent = existLikes;
-         //   updateTotalLikes();
+           updateTotalLikes();
 
      });
 

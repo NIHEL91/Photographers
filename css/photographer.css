@@ -4,16 +4,36 @@ body {
 }
 #contact_modal {
     display: none;
-    position: fixed;
-    z-index: 1;
     left: 0;
     top: 0;
     overflow: auto;
+    height: 900px;
     width: 669px;
-  height: 900px;
-
- 
+    position: fixed;
+    top: 50%; /* Positionne le centre de la modale à 50% du viewport */
+    left: 50%; /* Positionne le centre de la modale à 50% du viewport */
+    transform: translate(-50%, -50%); /* Décale la modale pour qu'elle soit parfaitement centrée */
+    box-shadow: -5px 10px 30px 0px rgba(0, 0, 0, 0.25);
+    opacity: 1; /* Rendre la modale visible */
+    z-index: 1000; /* Assure que la modale est au-dessus des autres éléments */
+    padding: 20px; /* Ajoute du padding pour le contenu intérieur */
+    border-radius: 8px; /* Arrondi les coins pour un design plus doux */
 }
+
+
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(196, 196, 196, 0.4);
+    ;
+    z-index: 999; /* Juste en dessous de la modale */
+    display: none; /* Masqué par défaut */
+}
+
 
 .photograph-header {
     background-color: #FAFAFA;
@@ -47,7 +67,7 @@ body {
     width: 200px;
     border-radius: 50%;
 }
-.contact_button {
+.contact_button, .btn-submit {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -67,14 +87,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 35px;
+    padding-top: 20px;
+    padding-bottom:30px;
+    box-shadow: -5px 10px 30px 0px rgba(0, 0, 0, 0.25);
     margin: auto;
 
     width: 100%;
     overflow: hidden;
 }
-
-
+#modalTitle {
+    margin-left: 30px;
+}
+.modal-body {
+    margin-top: 20px;
+}
 .modal header {
     justify-content: space-between;
     width: 100%;
@@ -87,7 +113,6 @@ body {
 .modal header h2 {
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
 }
 
 form {
@@ -111,8 +136,10 @@ form div {
 }
 
 form input {
-    width: 100%;
-    height: 68px;
+    width: 599px;
+  height: 68px;
+
+
     border: none;
     border-radius: 5px;
 }
@@ -210,6 +237,7 @@ select {
     margin: -21px;
     margin-right: 10px;
 }
+
 
 
 .totalLikesCount, .price {
