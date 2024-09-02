@@ -1,6 +1,6 @@
 
 import { getPhotographers } from '../pages/index.js';
-import { getQueryParams } from '../pages/photographer.js';
+import { getQueryParams } from '../pages/media.js';
 
 // Sélection des éléments du DOM
 

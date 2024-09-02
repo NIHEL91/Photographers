@@ -1,68 +1,75 @@
 import { mediaTemplate } from '../templates/media.js';
+import { getPhotographers } from '../pages/index.js';
+import { photographerMediaTemplate } from '../utils/photographersMedia.js';
 
-let mediaArray = [];
+  let mediaById = [];
 
+// Pour récupérer le ID depuis l'URL
+  export function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        photographerId: parseInt(params.get('photographerId'))
+    };
+}
+
+// Récupérer les médias
 export async function getMedia() {
     const response = await fetch("../../data/photographers.json");
     const data = await response.json();
-    console.log (data);
-    return data;
+    const media = data.media;
+    const { photographerId } = getQueryParams(); // Obtenir l'ID du photographe depuis l'URL
+    mediaById = media.filter(mediaItem => mediaItem.photographerId === photographerId);
+    return mediaById;
 }
 
-//afficher les medias
-async function displayDataMedia( media) {
+// Trier les médias
+export function sortMedia(option) {
+    if (option === "date") {
+        mediaById.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (option === "title") {
+        mediaById.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    clearMedia();
+    displayDataMedia(mediaById);
+    console.log(mediaById);
+}
+
+// Supprimer tous les médias dans l'HTML
+export function clearMedia() {
+    const mediaContainer = document.querySelector(".photographer-container");
+    mediaContainer.innerHTML = '';
+}
+
+// Afficher les médias
+export async function displayDataMedia(media) {
     const photographContainer = document.querySelector(".photographer-container");
-
-
-
     media.forEach((mediaItem) => {
         const mediaModel = mediaTemplate(mediaItem);
         const photoCardDOM = mediaModel.getPhotoCardDOM();
         photographContainer.appendChild(photoCardDOM);
     });
 }
- // Fonction d'initialisation
- async function init() {
 
-    // Récupère les données des photographes
-    const {media} = await getMedia();
-    mediaArray = media;
-    displayDataMedia(mediaArray); 
+// Afficher les détails du photographe
+export async function displayPhotographerDetails() {
+    const { photographerId } = getQueryParams();
+    const data = await getPhotographers();
+    const photographer = data.photographers.find(p => p.id === photographerId);
 
-
-}
-
-//systéme de trie par date te titre 
-// Variable pour stocker les médias
-
-document.getElementsByClassName("options").addEventListener("change", (event) => {
-    sortMedia(event.target.value);
-});
-
-function clearMedia() {
-    const mediaContainer = document.getElementsByClassName("photographer-container");
-    mediaContainer.innerHTML = '';
-}
-
-function sortMedia(option) {
-    let sortedMedia = [];
-
-    if (option === "date") {
-        sortedMedia = mediaArray.sort((a, b) => new Date(b.date) - new Date(a.date));
-    } else if (option === "title") {
-        sortedMedia = mediaArray.sort((a, b) => a.title.localeCompare(b.title));
+    if (photographer) {
+        const photographHeader = document.querySelector(".photograph-header");
+        const photographerModel = photographerMediaTemplate(photographer);
+        const photographerCardDOM = photographerModel.getPhotographerCardDOM();
+        photographHeader.appendChild(photographerCardDOM);
+    } else {
+        console.error('Photographer not found');
     }
-
-    clearMedia();
-    displaySortedMedia(sortedMedia);
 }
 
-function displaySortedMedia(mediaArray) {
-    mediaArray.forEach(media => {
-        displayMedia(media);
-    });
+// Fonction d'initialisation
+export async function init() {
+    await displayPhotographerDetails();
+    const media = await getMedia();
+    displayDataMedia(media);
 }
-
-    
-init();
-    
