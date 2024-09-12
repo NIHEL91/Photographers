@@ -9,7 +9,7 @@ import { photographerTemplate } from '../templates/photographer.js';
 }
 
 //afficher les phorographers
-async function displayData(photographers) {
+export async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section"); // on va ajouter les cartesphotographes dans cette classe
     photographers.forEach((photographer) => {
         // Crée un modèle pour chaque photographe

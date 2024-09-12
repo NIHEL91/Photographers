@@ -58,7 +58,7 @@ body {
     margin-top: 20px;
     margin-left: 100px;
 }
-.image-media {
+.image-media, .video-media {
     Width: 350px;
     Height: 300px;
 }

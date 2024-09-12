@@ -1,10 +1,16 @@
 
-import { updateTotalLikes } from '../pages/like.js'; 
+import { updateTotalLikes } from '../utils/like.js'; 
 ///Création les élements des photgraphes
 export function mediaTemplate(data) {
-    const {  title, image, likes } = data;
+    const {  title, image,video, likes} = data;
 
-    const picture = `assets/media/Marcel/${image}`;
+    let picture ='';
+    if (image) {
+        picture = `assets/media/Marcel/${image}`;
+    } else if (video) {
+        picture = `assets/media/Marcel/${video}`;
+    }
+
     // Variable pour stocker les likes actuels dans le fichier jison
     let existLikes = likes;
 
@@ -17,10 +23,20 @@ export function mediaTemplate(data) {
         figure.classList.add('media-figure'); // Ajoute une classe pour appliquer le CSS
 
         //Création de la balise image
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture);
-        img.classList.add('image-media'); // Ajoute une classe pour appliquer le CSS
+        let mediaImgVid = '';
+        if (image) {
+            mediaImgVid = document.createElement( 'img' );
+            mediaImgVid.setAttribute("src", picture);
+            mediaImgVid.classList.add('image-media'); // Ajoute une classe pour appliquer le CSS
+        }
 
+        // Si c'est une vidéo, créer une balise video
+        else if (video) {
+            mediaImgVid = document.createElement('video');
+            mediaImgVid.setAttribute("src", picture);
+            mediaImgVid.setAttribute("controls", "true"); // Ajouter des contrôles vidéo
+            mediaImgVid.classList.add('video-media'); // Ajoute une classe pour appliquer le CSS
+        }
         //Création du div pour le titre et l'icon
         const text = document.createElement( 'div' );
         text.classList.add('text'); 
@@ -57,11 +73,11 @@ export function mediaTemplate(data) {
         text.appendChild(h2);
         text.appendChild(likeContainer);
 
-        figure.appendChild(img);
+        figure.appendChild(mediaImgVid);
         figure.appendChild(text);
         article.appendChild(figure);
 
         return (article);
     }
-    return { title, image, likes, getPhotoCardDOM }
+    return { title, image,video, likes, getPhotoCardDOM }
 }
