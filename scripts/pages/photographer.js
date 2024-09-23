@@ -52,6 +52,8 @@ export async function displayPhotographerDetails() {
 
 
 // Fonction d'initialisation
+
+
 export async function init() {
     const media = await getMedia(); // Récupération des médias
     const photographer = await displayPhotographerDetails(); // Récupération du photographe

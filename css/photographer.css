@@ -245,3 +245,37 @@ select {
     padding:13px;
 
 }
+/* Lightbox  */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display:none;
+  }
+  
+  .lightbox-content {
+    width: 1050px;
+    height: 900px;
+
+  }
+  
+  .fa-xmark {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgba(144, 28, 28, 1);
+
+    cursor: pointer;
+   
+  }
+  .active-lightbox {
+    display: flex;
+}

@@ -34,6 +34,16 @@
       </div>
 
     </main>
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <span class="close-lightbox" onclick="closeLightbox()">
+        <i class="fa-solid fa-xmark"></i>
+      </span>
+      <img class="lightbox-content" id="lightbox-img">
+      <video class="lightbox-content" id="lightbox-video" controls></video>
+
+    </div>
+
     <div id="overlay"></div>
     <div id="contact_modal">
       
@@ -81,6 +91,7 @@
       </div>
       
     <script   type="module" src="/scripts/pages/photographer.js"></script>
+    <script   type="module" src="/scripts/templates/media.js"></script>
 
     <script  type="module"  src="/scripts/utils/contactForm.js"></script> <!--type module indique au navigateur que le fichier est un module ecpascript permet l'utilisation de import et export--> 
     
