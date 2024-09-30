@@ -1,19 +1,33 @@
 
 import { updateTotalLikes } from '../utils/like.js'; 
+import { mediaSorted } from '../utils/media.js';
+//import {media} from '../utils/media.js';
 ///Création les élements des photgraphes
-export function mediaTemplate(data) {
-    const {  title, image,video, likes} = data;
-    let media ;
-    if ( image) {
-        media = new Image(image);
-    } else if (video) {
-        media = new Video(video);
-    } else {
-    throw new Error("Type de média non supporté");
-}
-    // Variable pour stocker les likes actuels dans le fichier jison
-    let existLikes = likes;
+ function MediaFactory(data) {
+    this.createMedia = function() {
+        const { image, video } = data;
 
+        let media ;
+        if ( image) {
+            media = new Image(image);
+            } else if (video) {
+            media = new Video(video);
+            } else {
+                    throw new Error("Type de média non supporté");
+        }
+        return media;
+
+    };
+
+}
+
+export function mediaTemplate(data) {
+        const { title, likes } = data;
+        const mediaFactory = new MediaFactory(data);
+        const media = mediaFactory.createMedia();  
+        // Variable pour stocker les likes actuels dans le fichier jison
+        let existLikes = likes;
+    
     function getPhotoCardDOM() {
 
         const article = document.createElement( 'article' );
@@ -51,6 +65,7 @@ export function mediaTemplate(data) {
             existLikes += 1;
             likeCount.textContent = existLikes;
            updateTotalLikes();
+           
 
      });
 
@@ -66,7 +81,7 @@ export function mediaTemplate(data) {
 
         return (article);
     }
-    return { title, image,video, likes, getPhotoCardDOM }
+    return {  title, likes, getPhotoCardDOM }
 }
 
  let Image = function(image) {
@@ -77,9 +92,15 @@ export function mediaTemplate(data) {
             mediaImg.classList.add('image-media'); // Ajoute une classe pour appliquer le CSS
 
              // Ajouter un événement au clic pour ouvrir la lightbox
+           /* mediaImg.addEventListener('click', () => {
+                const index = mediaSorted.indexOf(i); // Trouve l'index du média
+                openLightbox(this.src, 'image', index);
+                console.log(mediaImg);
+            });
+            return mediaImg;*/
             mediaImg.addEventListener('click', () => {
-            openLightbox(this.src,'image');
-        });
+                openLightbox(this.src,'image');//ajouter l'argument  type (video)
+            });
             return mediaImg;
     }
 }
@@ -92,20 +113,32 @@ export function mediaTemplate(data) {
             mediaVid.classList.add('video-media'); // Ajoute une classe pour appliquer le CSS
               // Ajouter un événement au clic pour ouvrir la lightbox
               mediaVid.addEventListener('click', () => {
-                openLightbox(this.src,'video');
+                openLightbox(this.src,'video');//ajouter l'argument  type (video)
             });
             return mediaVid;
         }
     }
+
+let i = 0;
 // Fonction pour ouvrir la lightbox
-function openLightbox(src, mediaType) {
+function openLightbox(src, mediaType, index) {
     
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxVideo = document.getElementById('lightbox-video');
-     // Réinitialiser la lightbox (masquer les deux éléments)
+
+     // (masquer les deux éléments)
      lightboxImg.style.display = 'none';
      lightboxVideo.style.display = 'none';
+        /* Vérifie si mediaSorted est vide 
+        if (media.sortedMedia.length === 0) {
+            console.error('mediaSorted est vide, impossible d\'ouvrir la lightbox.');
+            return; // Empêche l'ouverture de la lightbox
+        }*/
+    
+        // Reste du code pour ouvrir la lightbox
+    
+    
     if (mediaType === 'image') {
         lightboxImg.src = src; // Afficher l'image
         lightboxImg.style.display = 'block'; // Afficher l'image dans la lightbox
@@ -115,8 +148,8 @@ function openLightbox(src, mediaType) {
     }
 
     lightbox.classList.add('active-lightbox'); // Affiche la lightbox
+    i = index; // Met à jour l'index courant ici
 }
-
 
 // Fonction pour fermer la lightbox
 function closeLightbox() {
@@ -133,8 +166,35 @@ function closeLightbox() {
   
   // Événement pour fermer la lightbox en cliquant sur la croix
 document.querySelector('.close-lightbox').addEventListener('click', closeLightbox);
- 
 
+// Fonction pour mettre à jour la lightbox
+function updateLightbox() {
+
+     // Récupérer le média courant
+     let currentMedia = mediaSorted[i];
+     if (currentMedia.image) {
+         openLightbox(`assets/media/Marcel/${currentMedia.image}`, 'image');
+     } else if (currentMedia.video) {
+         openLightbox(`assets/media/Marcel/${currentMedia.video}`, 'video');
+     }
+ }
+  
+// Affiche le média suivant
+function getNextMedia() {
+    i = (i + 1) % mediaSorted.length; // Passer au média suivant
+    updateLightbox(); // Met à jour l'affichage de la lightbox
+}
+
+// Affiche le média précédent
+function getPreviousMedia() {
+    i = (i - 1 + mediaSorted.length) % mediaSorted.length; // Passer au média précédent
+    updateLightbox(); // Met à jour l'affichage de la lightbox
+}
+
+
+// Ajouter des événements sur les boutons "Next" et "Previous"
+document.getElementById('next-btn').addEventListener('click', getNextMedia);
+document.getElementById('prev-btn').addEventListener('click', getPreviousMedia);
 
  
 

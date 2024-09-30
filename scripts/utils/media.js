@@ -11,8 +11,24 @@ export async function displayDataMedia(media) {
     });
 }
 
+let mediaSorted = [];
+export {mediaSorted};
+
+export const media = {
+    // Getter pour récupérer le tableau trié
+    get sortedMedia() {
+        return mediaSorted; 
+    },
+
+    // Setter pour définir le tableau trié
+    set sortedMedia(sortedArray) { // sortedArray est le tableau qu'on passe pour mettre à jour mediaSorted
+        mediaSorted = sortedArray; // met à jour mediaSorted avec la nouvelle valeur sortedArray
+    }
+};
+
+
 // Trier les médias
-export function sortMedia(option,mediaById) {
+ export  function sortMedia(option,mediaById) {
     if (option === "date") {
         mediaById.sort((a, b) => new Date(b.date) - new Date(a.date));
     } else if (option === "title") {
@@ -21,7 +37,10 @@ export function sortMedia(option,mediaById) {
 
     clearMedia();
     displayDataMedia(mediaById);
-}
+      // Utilise le setter pour mettre à jour le tableau trié
+      media.sortedMedia = mediaById;
+      
+    }
 
 // Supprimer tous les médias dans l'HTML
 export function clearMedia() {

@@ -2,6 +2,7 @@
 <html>
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -35,12 +36,16 @@
 
     </main>
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
+    <div id="lightbox" class="lightbox" aria-label="image closeup view" role=”dialog”>
       <span class="close-lightbox" onclick="closeLightbox()">
+        <span  id="prev-btn" class="prev-lightbox"><</span>
         <i class="fa-solid fa-xmark"></i>
       </span>
       <img class="lightbox-content" id="lightbox-img">
-      <video class="lightbox-content" id="lightbox-video" controls></video>
+      <video class="video-media" id="lightbox-video"></video>
+      <span id="next-btn" class="next-lightbox" onclick="getNextMedia()">></span>
+
+
 
     </div>
 

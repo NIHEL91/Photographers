@@ -279,3 +279,19 @@ select {
   .active-lightbox {
     display: flex;
 }
+
+.video-media {
+    display: none;
+}
+
+.fa-chevron-left {
+width: 96px;
+height: 96px;
+
+}
+
+.previous-lightbox, .next-lightbox {
+    font-size: 90px;
+    color: rgba(144, 28, 28, 1);
+    margin:20px;
+}
