@@ -1,11 +1,11 @@
-import { sortMedia } from '../utils/media.js';
+import { getMediaById, sortMedia, setMediaById} from '../utils/media.js';
 import { getPhotographers } from '../pages/index.js';
 import { photographerTemplate } from '../templates/photographer.js';
 import { displayDataMedia } from '../utils/media.js';
 import { calculateAndDisplayLikes } from '../utils/like.js';
 import { displayModal, setupForm } from '../utils/contactForm.js';
 
-let mediaById = [];
+//let mediaById = [];
 
 // Récupérer les médias
 export async function getMedia() {
@@ -13,10 +13,16 @@ export async function getMedia() {
     const data = await response.json();
     const media = data.media;
     const { photographerId } = getQueryParams(); // Obtenir l'ID du photographe depuis l'URL
-    mediaById = media.filter(mediaItem => mediaItem.photographerId === photographerId);
-    return mediaById;
-}
+    
+    const filteredMedia = media.filter(mediaItem => mediaItem.photographerId === photographerId);
+    
+    console.log('Affichage media :', filteredMedia);
+    
+    // Utilise la fonction setter pour mettre à jour mediaById
+    setMediaById(filteredMedia);
+    return filteredMedia;
 
+}
 // Pour récupérer le ID depuis l'URL
 export function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
@@ -28,7 +34,8 @@ export function getQueryParams() {
 // Ajoute un écouteur d'événements pour le changement de sélection dans la liste déroulante
 document.querySelector(".options").addEventListener("change", function(event) {
     const selectedOption = event.target.value;
-    sortMedia(selectedOption, mediaById);
+    const media = getMediaById();
+    sortMedia(selectedOption, media);
 });
 
 

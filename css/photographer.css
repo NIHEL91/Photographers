@@ -290,8 +290,10 @@ height: 96px;
 
 }
 
-.previous-lightbox, .next-lightbox {
+.prev-lightbox, .next-lightbox {
     font-size: 90px;
     color: rgba(144, 28, 28, 1);
     margin:20px;
+    cursor: pointer; /* Assurez-vous que le curseur change pour montrer qu'il est cliquable */
+
 }
