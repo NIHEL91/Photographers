@@ -13,7 +13,6 @@ export async function displayDataMedia(media) {
 }
 let mediaById = []; // Variable globale pour stocker les médias
 
-
 // Fichier d'origine de mediaById
 
 export function getMediaById() {

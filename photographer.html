@@ -37,12 +37,15 @@
     </main>
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox" aria-label="image closeup view" role=”dialog”>
-      <span class="close-lightbox" onclick="closeLightbox()">
-      <span  id="prev-btn" class="prev-lightbox"><</span>
-       <i class="fa-solid fa-xmark"></i>
+      <span class="close-lightbox">    
+           <i class="fa-solid fa-xmark"></i>
       </span>
+      <span  id="prev-btn" class="prev-lightbox"><</span>
+
       <img class="lightbox-content" id="lightbox-img">
+
       <video class="video-media" id="lightbox-video"></video>
+      
       <span id="next-btn" class="next-lightbox" >></span>
 
     </div>
@@ -55,7 +58,7 @@
           <h2 id="modalTitle"></h2>
         </header>
             <span class="closeStar">
-              <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la fenêtre" />
+              <img src="assets/icons/close.svg"  alt="Fermer la fenêtre" />
             </span>
             <div class="modal-body">
               <form id="myForm">

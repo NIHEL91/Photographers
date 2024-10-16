@@ -84,6 +84,7 @@ export function mediaTemplate(data) {
     }
     return {  title, likes, getPhotoCardDOM }
 }
+
 let currentSrc;
  let Image = function(image) {
     this.src = `assets/media/Marcel/${image}`;
@@ -117,34 +118,36 @@ let currentSrc;
             mediaVid.classList.add('video-media'); // Ajoute une classe pour appliquer le CSS
               // Ajouter un événement au clic pour ouvrir la lightbox
               mediaVid.addEventListener('click', () => {
-                openLightbox(this.src,'video');//ajouter l'argument  type (video)
                 currentSrc = this.src; 
 
             });
             return mediaVid;
         }
     }
-// Fonction pour ouvrir la lightbox
-function openLightbox(src, mediaType) {
-    
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxVideo = document.getElementById('lightbox-video');
-
-     // (masquer les deux éléments)
-    // lightboxImg.style.display = 'none';
-     //lightboxVideo.style.display = 'none';
-    
-    if (mediaType === 'image') {
-        lightboxImg.src = src; // Afficher l'image
-        lightboxImg.style.display = 'block'; // Afficher l'image dans la lightbox
-    } else if (mediaType === 'video') {
-        lightboxVideo.src = src; // Afficher la vidéo
-        lightboxVideo.style.display = 'block'; // Afficher la vidéo dans la lightbox
-    }
-
+    const lightboxVideo = document.getElementById('lightbox-video');  
+// Fonction pour ouvrir la lightbox
+function openLightbox(src, mediaType) {
     lightbox.classList.add('active-lightbox'); // Affiche la lightbox
-    //i = index; // Met à jour l'index courant ici
+    updateLightbox(src, mediaType);
+
+    const mediaSorted = getMediaById(); // Récupère le tableau trié
+    console.log('Ce tableau est passé à la méthode next : ', mediaSorted);
+    console.log(currentSrc);
+
+    // Parcours du tableau mediaSorted pour trouver l'image actuelle
+    for (let i = 0; i < mediaSorted.length; i++) {
+        const sortedFilePath = mediaSorted[i].image ? `assets/media/Marcel/${mediaSorted[i].image}` : undefined; // Chemin complet de l'image dans mediaSorted
+        console.log('Comparaison de:', sortedFilePath, 'avec', currentSrc);
+
+        // Comparaison du chemin complet de l'image
+        if (sortedFilePath === currentSrc) {
+            currentIndex = i;
+            break; 
+        }
+        console.log(currentIndex);
+   }
 }
 
 // Fonction pour fermer la lightbox
@@ -164,48 +167,43 @@ function closeLightbox() {
 document.querySelector('.close-lightbox').addEventListener('click', closeLightbox);
 
 // Fonction pour mettre à jour la lightbox
-/*function updateLightbox() {
-   
- }*/
+function updateLightbox(src, mediaType) {
+    
+    if (mediaType === 'image') {
+        lightboxImg.src = src; // Afficher l'image
+        lightboxImg.style.display = 'block'; // Afficher l'image dans la lightbox
+    } else if (mediaType === 'video') {
+        lightboxVideo.src = src; // Afficher la vidéo
+        lightboxVideo.style.display = 'block'; // Afficher la vidéo dans la lightbox
+    }
+ }
+
   
 
 // Affiche le média suivant
+let currentIndex = -1;
 function getNextMedia() {
     const mediaSorted = getMediaById(); // Récupère le tableau trié
-    console.log('Ce tableau est passé à la méthode next : ', mediaSorted);
-    let currentIndex = -1;
-    console.log(currentSrc);
-
-    // Parcours du tableau mediaSorted pour trouver l'image actuelle
-    for (let i = 0; i < mediaSorted.length; i++) {
-        const sortedFilePath = mediaSorted[i].image ? `assets/media/Marcel/${mediaSorted[i].image}` : undefined; // Chemin complet de l'image dans mediaSorted
-        console.log('Comparaison de:', sortedFilePath, 'avec', currentSrc);
-
-        // Comparaison du chemin complet de l'image
-        if (sortedFilePath === currentSrc) {
-            currentIndex = i;
-            break; 
-        }
-        console.log(currentIndex);   }
 
     // Vérifier s'il y a un média suivant
     if (currentIndex !== -1 && currentIndex + 1 < mediaSorted.length) {
-        const nextMedia = mediaSorted[currentIndex + 1]; // Récupère le média suivant
+        currentIndex++;
+        const nextMedia = mediaSorted[currentIndex]; // Récupère le média suivant
         
         if (nextMedia) {
             const newSrc = `assets/media/Marcel/${nextMedia.image}`;
-                openLightbox(newSrc, 'image');
+            updateLightbox(newSrc, 'image');
                 currentSrc = newSrc; // Met à jour currentSrc pour l'image suivante
             }
             else if (nextMedia.video) {
                 const newSrc = `assets/media/Marcel/${nextMedia.video}`;
-                openLightbox(newSrc, 'video');
+                updateLightbox(newSrc, 'video');
                 currentSrc = newSrc; // Met à jour currentSrc pour la vidéo suivante
          
     } else {
         console.log('Pas de média suivant');
     }
-}
+    }
 }
 //Affiche le média précédent
 function getPreviousMedia() {
@@ -233,12 +231,12 @@ function getPreviousMedia() {
             // S'assurer que nextMedia existe avant de l'utiliser
             if (previousMedia) {
                 const newSrc = `assets/media/Marcel/${previousMedia.image}`;
-                    openLightbox(newSrc, 'image');
+                updateLightbox(newSrc, 'image');
                     currentSrc = newSrc; // Met à jour currentSrc pour l'image suivante
                 }
                 else if (previousMedia.video) {
                     const newSrc = `assets/media/Marcel/${previousMedia.video}`;
-                    openLightbox(newSrc, 'video');
+                    updateLightbox(newSrc, 'video');
                     currentSrc = newSrc; // Met à jour currentSrc pour la vidéo suivante
              
         } else {
