@@ -1,7 +1,6 @@
 
  import { mediaTemplate } from "../templates/media.js";
 
-
 // Afficher les médias
 export async function displayDataMedia(media) {
     const photographContainer = document.querySelector(".photographer-container");
@@ -13,33 +12,15 @@ export async function displayDataMedia(media) {
 }
 let mediaById = []; // Variable globale pour stocker les médias
 
-// Fichier d'origine de mediaById
-
+//getter et setter
 export function getMediaById() {
     return mediaById;
 }
 
 export function setMediaById(media) {
     mediaById = media;
-    console.log('ca passe dans le setter:', mediaById);
 
 }
-/*
-export const media = {
-    media:mediaById,
-    // Getter pour récupérer le tableau trié
-    get sortedMedia() {
-        console.log(this.media);
-        return this.media; 
-
-    },
-
-    // Setter pour définir le tableau trié
-    set sortedMedia(sortedArray) {
-        console.log("setter");
-        this.media = sortedArray; // Met à jour mediaSorted avec la nouvelle valeur sortedArray
-    }
-};*/
 
 // Fonction pour trier les médias
 export function sortMedia(option, media) {
