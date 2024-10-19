@@ -33,7 +33,7 @@ export function sortMedia(option, media) {
         mediaById.sort((a, b) => a.title.localeCompare(b.title));
     }
     if (option === 'popularity') {
-        return mediaById.sort((a, b) => b.likes - a.likes);
+         mediaById.sort((a, b) => b.likes - a.likes);
     }
     // Supprime tous les médias de l'HTML avant d'afficher les nouveaux triés
     clearMedia();

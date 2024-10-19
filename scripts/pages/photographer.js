@@ -3,7 +3,7 @@ import { getPhotographers } from '../pages/index.js';
 import { photographerTemplate } from '../templates/photographer.js';
 import { displayDataMedia } from '../utils/media.js';
 import { calculateAndDisplayLikes } from '../utils/like.js';
-import { displayModal, setupForm } from '../utils/contactForm.js';
+import { setupForm } from '../utils/contactForm.js';
 
 //let mediaById = [];
 
@@ -67,6 +67,5 @@ export async function init() {
     calculateAndDisplayLikes(media, photographer); // Passez l'objet 'photographer' ici
     displayDataMedia(media); // Affichage des médias
     setupForm();
-    displayModal(photographer);
 }
 init();

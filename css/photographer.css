@@ -295,3 +295,9 @@ height: 96px;
     cursor: pointer; /* Assurez-vous que le curseur change pour montrer qu'il est cliquable */
 
 }
+
+
+.title {
+font-size: 24px;
+color: rgba(144, 28, 28, 1);
+}

@@ -83,7 +83,6 @@ export function mediaTemplate(data) {
     return {  title, likes, getPhotoCardDOM }
 }
 
-let currentSrc;
 let Image = function(image) {
     this.src = `assets/media/Marcel/${image}`;
     this.getDOM = function() {
@@ -91,40 +90,51 @@ let Image = function(image) {
             mediaImg.setAttribute("src", this.src);
             mediaImg.classList.add('image-media'); // Ajoute une classe pour appliquer le CSS
 
-        
             mediaImg.addEventListener('click', () => {
                 openLightbox(this.src, 'image');
-                currentSrc = this.src; 
 
             });
             return mediaImg;
 
     }
 }
-    let Video = function(video) {
-        this.src = `assets/media/Marcel/${video}`;
-        this.getDOM = function() {
-            let mediaVid = document.createElement('video');
-            mediaVid.setAttribute("src", this.src);
-            mediaVid.setAttribute("controls", "true"); // Ajouter des contrôles vidéo
-            mediaVid.classList.add('video-media'); // Ajoute une classe pour appliquer le CSS
-              // Ajouter un événement au clic pour ouvrir la lightbox
-              mediaVid.addEventListener('click', () => {
-                openLightbox(this.src,'video');//ajouter l'argument  type (video)
-                currentSrc = this.src; 
-
-            });
-            return mediaVid;
-        }
+let Video = function(video) {
+    this.src = `assets/media/Marcel/${video}`;
+    this.getDOM = function() {
+        let mediaVid = document.createElement('video');
+        mediaVid.setAttribute("src", this.src);
+        mediaVid.setAttribute("controls", "true"); // Ajouter des contrôles vidéo
+        mediaVid.classList.add('video-media'); // Ajoute une classe pour appliquer le CSS
+        // Ajouter un événement au clic pour ouvrir la lightbox
+        mediaVid.addEventListener('click', () => {
+            openLightbox(this.src,'video');//ajouter l'argument  type (video)
+        });
+        return mediaVid;
     }
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxVideo = document.getElementById('lightbox-video');
+}
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxVideo = document.getElementById('lightbox-video');
+
+let currentIndex = -1;
 // Fonction pour ouvrir la lightbox
 function openLightbox(src, mediaType) {
+    const mediaSorted = getMediaById();
+    currentIndex = mediaSorted.findIndex(media => {
+        const filePath = `assets/media/Marcel/${media.image || media.video}`;
+        return filePath === src;
+    });
+    const currentMedia = mediaSorted[currentIndex];
+
+    // Mettre à jour le titre avec le titre du média courant
+    const lightboxTitle = document.getElementById('lightbox-title');
+    lightboxTitle.textContent = currentMedia.title;
+
+    // Mettre à jour l'affichage de la lightbox
     updateLightbox(src, mediaType);
     lightbox.classList.add('active-lightbox'); // Affiche la lightbox
 }
+
 
 // Fonction pour fermer la lightbox
 function closeLightbox() {
@@ -139,6 +149,7 @@ function closeLightbox() {
 
      lightboxVideo.pause(); // Mettre la vidéo en pause lorsqu'on ferme la lightbox
 }
+
 // Événement pour fermer la lightbox en cliquant sur la croix
 document.querySelector('.close-lightbox').addEventListener('click', closeLightbox);
 
@@ -159,11 +170,22 @@ function updateLightbox(src, mediaType) {
 
     }
 }
-  
-
 // Affiche le média suivant
 function getNextMedia() {
-//pour trouver l'image actuelle et remplacer la boucle for
+    const mediaSorted = getMediaById();
+  
+    const nextIndex = (currentIndex + 1) % mediaSorted.length;
+    currentIndex = nextIndex;
+    const nextMedia = mediaSorted[currentIndex];
+    if (nextMedia) {
+      const newSrc = `assets/media/Marcel/${nextMedia.image || nextMedia.video}`;
+      const mediaType = nextMedia.image ? 'image' : 'video'; //opérateur ternaire,(les conditions image ou video )le média est considéré comme une image, sinon, c'est une vidéo ca remplace le if else
+      updateLightbox(newSrc, mediaType);
+    }
+}
+
+// Affiche le média précédent
+function getPreviousMedia() {
     const mediaSorted = getMediaById();
     let currentIndex = mediaSorted.findIndex(media => {//findIndex pour trouver directement l'index courrant dans le tableau//  Cette fonction de rappel reçoit trois arguments :
         //L'élément actuel
@@ -173,36 +195,17 @@ function getNextMedia() {
       return filePath === currentSrc;
     });
   
-    // chercher l'index du média suivante en tenant compte de la circularité
-    const nextIndex = (currentIndex + 1) % mediaSorted.length;
-    const nextMedia = mediaSorted[nextIndex];
-    if (nextMedia) {
-      const newSrc = `assets/media/Marcel/${nextMedia.image || nextMedia.video}`;
-      const mediaType = nextMedia.image ? 'image' : 'video'; //opérateur ternaire,(les conditions image ou video )le média est considéré comme une image, sinon, c'est une vidéo ca remplace le if else
-      openLightbox(newSrc, mediaType);     
-       currentSrc = newSrc;
-    }
-}
-
-//Affiche le média précédent
-function getPreviousMedia() {
-    const mediaSorted = getMediaById();
-    let currentIndex = mediaSorted.findIndex(media => {//findIndex pour trouver directement l'index courrant dans le tableau 
-      const filePath = `assets/media/Marcel/${media.image || media.video}`;
-      return filePath === currentSrc;
-    });
-  
-    // Calcul de l'index du média précédent en tenant compte de la circularité
-    const previousIndex = (currentIndex - 1 + mediaSorted.length) % mediaSorted.length;//Calcul circulaire de l'index précédent
-  
+    const previousIndex = (currentIndex - 1 + mediaSorted.length) % mediaSorted.length;
     const previousMedia = mediaSorted[previousIndex];
     if (previousMedia) {
       const newSrc = `assets/media/Marcel/${previousMedia.image || previousMedia.video}`;
-      const mediaType = previousMedia.image ? 'image' : 'video';
-      openLightbox(newSrc, mediaType);     
-       currentSrc = newSrc;
+      const mediaType = previousMedia.image ? 'image' : 'video'; //opérateur ternaire,(les conditions image ou video )le média est considéré comme une image, sinon, c'est une vidéo ca remplace le if else
+      updateLightbox(newSrc, mediaType);
+      currentSrc = newSrc;
     }
-  }
+}
+
+
 // Ajouter des événements sur les boutons "Next" et "Previous"
 document.getElementById('next-btn').addEventListener('click', getNextMedia);
 document.getElementById('prev-btn').addEventListener('click', getPreviousMedia);
