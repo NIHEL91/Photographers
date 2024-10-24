@@ -30,6 +30,8 @@ function resetForm() {
 
 // Ajouter des événements pour ouvrir la modale
 modalBtn.forEach((btn) => btn.addEventListener("click", displayModal));
+
+
 export function setupForm() {
 
 // Ajouter des événements pour fermer la modale
@@ -53,29 +55,25 @@ myForm.addEventListener("submit", (event) => {
     console.log("Message :", message);
 
 // Vérifier que les champs obligatoires ne sont pas vides
-  let isValid = true;
 // Expression régulière pour valider les emails
-const regex = /^[^.\-].*@[a-z0-9.-]+\.[a-z]{2,}$/;         
+const regex = /^[^.-].*@[a-z0-9.-]+\.[a-z]{2,}$/;         
 
     // Valider le champ email
     
     if (!regex.test(email)) {
       document.getElementById('errorEmail').style.display = 'block';
       document.getElementById('email').style.border = '2px solid red'; // Applique la bordure rouge
-      isValid = false;
     }
     // Valider le champ prénom
 
     if (firstName ==="") {
       document.getElementById('errorFirst').style.display = 'block';
       document.getElementById('first').style.border = '2px solid red'; // Applique la bordure rouge
-      isValid = false;
     }
       // Valider le champ nom
     if (lastName === ""){
       document.getElementById('errorLast').style.display = 'block';
       document.getElementById('last').style.border = '2px solid red'; // Applique la bordure rouge
-      isValid = false;
     }
     else {
     // Après la soumission, réinitialiser le formulaire et fermer la modale

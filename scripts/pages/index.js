@@ -1,5 +1,6 @@
 // Imporation de la fonction depuis le fichier photgrapher.js
 import { photographerTemplate } from '../templates/photographer.js';
+import { displayModal } from '../utils/contactForm.js';
 
 //Récupérer les données du fichier Json 
  export async function getPhotographers() {
@@ -28,4 +29,4 @@ async function init() {
 
 // pour démarrer le processus de récupération et d'affichage
 init();
-    
+displayModal();    

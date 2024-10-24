@@ -84,7 +84,7 @@ export function mediaTemplate(data) {
 }
 
 let Image = function(image) {
-    this.src = `assets/media/Marcel/${image}`;
+    this.src = `assets/media/${image}`;
     this.getDOM = function() {
             let mediaImg = document.createElement( 'img' );
             mediaImg.setAttribute("src", this.src);
@@ -99,7 +99,7 @@ let Image = function(image) {
     }
 }
 let Video = function(video) {
-    this.src = `assets/media/Marcel/${video}`;
+    this.src = `assets/media/${video}`;
     this.getDOM = function() {
         let mediaVid = document.createElement('video');
         mediaVid.setAttribute("src", this.src);
@@ -121,7 +121,7 @@ let currentIndex = -1;
 function openLightbox(src, mediaType) {
     const mediaSorted = getMediaById();
     currentIndex = mediaSorted.findIndex(media => {
-        const filePath = `assets/media/Marcel/${media.image || media.video}`;
+        const filePath = `assets/media/${media.image || media.video}`;
         return filePath === src;
     });
     const currentMedia = mediaSorted[currentIndex];
@@ -170,6 +170,7 @@ function updateLightbox(src, mediaType) {
 
     }
 }
+
 // Affiche le média suivant
 function getNextMedia() {
     const mediaSorted = getMediaById();
@@ -178,7 +179,7 @@ function getNextMedia() {
     currentIndex = nextIndex;
     const nextMedia = mediaSorted[currentIndex];
     if (nextMedia) {
-      const newSrc = `assets/media/Marcel/${nextMedia.image || nextMedia.video}`;
+      const newSrc = `assets/media/${nextMedia.image || nextMedia.video}`;
       const mediaType = nextMedia.image ? 'image' : 'video'; //opérateur ternaire,(les conditions image ou video )le média est considéré comme une image, sinon, c'est une vidéo ca remplace le if else
       updateLightbox(newSrc, mediaType);
     }
@@ -187,21 +188,14 @@ function getNextMedia() {
 // Affiche le média précédent
 function getPreviousMedia() {
     const mediaSorted = getMediaById();
-    let currentIndex = mediaSorted.findIndex(media => {//findIndex pour trouver directement l'index courrant dans le tableau//  Cette fonction de rappel reçoit trois arguments :
-        //L'élément actuel
-        //L'index de l'élément
-        //Le tableau lui-même
-      const filePath = `assets/media/Marcel/${media.image || media.video}`;
-      return filePath === currentSrc;
-    });
-  
     const previousIndex = (currentIndex - 1 + mediaSorted.length) % mediaSorted.length;
-    const previousMedia = mediaSorted[previousIndex];
+    currentIndex = previousIndex;
+    const previousMedia = mediaSorted[currentIndex];
     if (previousMedia) {
-      const newSrc = `assets/media/Marcel/${previousMedia.image || previousMedia.video}`;
+      const newSrc = `assets/media/${previousMedia.image || previousMedia.video}`;
       const mediaType = previousMedia.image ? 'image' : 'video'; //opérateur ternaire,(les conditions image ou video )le média est considéré comme une image, sinon, c'est une vidéo ca remplace le if else
       updateLightbox(newSrc, mediaType);
-      currentSrc = newSrc;
+
     }
 }
 

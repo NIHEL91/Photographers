@@ -18,7 +18,7 @@ export async function getMedia() {
     
     console.log('Affichage media :', filteredMedia);
     
-    // Utilise la fonction setter pour mettre à jour mediaById
+    // Utiliser la fonction setter pour mettre à jour mediaById
     setMediaById(filteredMedia);
     return filteredMedia;
 
@@ -62,10 +62,13 @@ export async function displayPhotographerDetails() {
 
 
 export async function init() {
+    
     const media = await getMedia(); // Récupération des médias
     const photographer = await displayPhotographerDetails(); // Récupération du photographe
     calculateAndDisplayLikes(media, photographer); // Passez l'objet 'photographer' ici
     displayDataMedia(media); // Affichage des médias
     setupForm();
+
+
 }
-init();
+init(); 

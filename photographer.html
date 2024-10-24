@@ -36,24 +36,25 @@
 
     </main>
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-label="image closeup view" role=”dialog”>
-        <span class="close-lightbox">    
+    <div id="lightbox" class="lightbox" aria-label="image lightbox" role="dialog" >
+        <span class="close-lightbox" aria-label="Fermer la LightBox"aria-label="Image précédente" role="button">    
             <i class="fa-solid fa-xmark"></i>
         </span>
 
-        <span  id="prev-btn" class="prev-lightbox"><</span>
-  <div class="mediaImgVid">
-      <img class="lightbox-content" id="lightbox-img">
-      <video class="lightbox-content" id="lightbox-video"></video>
-      <h2 id="lightbox-title" class="title"></h2>
-  </div>
-        <span id="next-btn" class="next-lightbox" >></span>
+        <span  id="prev-btn" class="prev-lightbox"  aria-label="Image précédente" role="button" tabindex="0"><</span>
+        <div class="mediaImgVid">
+          <img class="lightbox-content" id="lightbox-img">
+          <video class="lightbox-content" id="lightbox-video">
+            <source src="" type="video/webm" />
+          </video>      
+          <h2 id="lightbox-title" class="title"></h2>
+        </div>
+        <span id="next-btn" class="next-lightbox" aria-label="Image suivante" role="button"  tabindex="0">></span>
     </div>
 
     <div id="overlay"></div>
-    <div id="contact_modal">
-      
-   <div class="modal" role="dialog" aria-describedby="modalTitle">
+    <div id="contact_modal"> 
+      <div class="modal" role="dialog" aria-describedby="modalTitle">
         <header>
           <h2 id="modalTitle"></h2>
         </header>
@@ -78,7 +79,7 @@
                   <span class="error" id="errorEmail">Veuillez entrer une adresse email valide.</span>
                 </div>
                 <div class="formData">
-                  <label class="text-label" for="message" id="labelmessage">Votre message</label>
+                  <label class="text-label" for="message" id="labelmessage" >Votre message</label>
                   <input class="text-control" ty
                   pe="date" id="message" name="message" aria-required="true" aria-labelledby="labelmessage">
                 </div>
