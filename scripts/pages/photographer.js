@@ -50,6 +50,9 @@ export async function displayPhotographerDetails() {
         const photographerModel = photographerTemplate(photographer);
         const photographerCardDOM = photographerModel.getHeaderDOM();
         photographHeader.appendChild(photographerCardDOM);
+        //const modalTitle = document.getElementById("modalTitle");
+        //modalTitle.innerHTML = `<span>Contactez-moi</span><br><span>${photographer.name}</span>`;
+    
         
     } else {
         console.error('Photographer not found');

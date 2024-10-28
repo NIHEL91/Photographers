@@ -8,8 +8,6 @@ const overlay = document.getElementById("overlay");
 // Fonction pour lancer la modale de formulaire
 
 export async function displayModal(photographers) {
-    const modalTitle = document.getElementById("modalTitle");
-    modalTitle.innerHTML = `<span>Contactez-moi</span><br><span>${photographers.name}</span>`;
     //fais défiler jusqu'a la modale (l'afficher )
     overlay.style.display = "block"; // Affiche l'overlay
     modal.style.display = "block";
