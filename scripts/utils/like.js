@@ -7,8 +7,8 @@ let totalLikes= 0;
         totalLikes += 1;
         const likesCountElement = document.querySelector(".totalLikesCount");
         likesCountElement.innerHTML = `
+           
             ${totalLikes}
- ${totalLikes}
             <i class="fa fa-heart" role="button" aria-label="Total des likes" tabindex="0"></i>
                    
         `;

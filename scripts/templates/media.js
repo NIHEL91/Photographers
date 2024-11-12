@@ -69,11 +69,15 @@ export function mediaTemplate(data) {
         
         // Ajouter un événement au clic pour incrémenter les likes
         icon.addEventListener('click', () => {
+            if (!icon.classList.contains('liked')) {
+
             existLikes += 1;
             likeCount.textContent = existLikes;
-           updateTotalLikes();
-             });
+            icon.classList.add('liked');
 
+           updateTotalLikes();
+            } });
+            
            icon.addEventListener('keydown', (e) => {
             if (e.key=== 'Enter') {
                 existLikes += 1;

@@ -5,8 +5,6 @@ const closeStar = document.querySelector(".closeStar"); // Bouton pour fermer la
 const myForm = document.getElementById("myForm"); // Le formulaire
 const overlay = document.getElementById("overlay");
 const firstField = document.getElementById("first");
-const lastField = document.getElementById("last");
-const emailField = document.getElementById("email");
 
 // Fonction pour lancer la modale de formulaire
 

@@ -245,6 +245,10 @@ select {
     padding:13px;
 
 }
+
+.fa-heart.liked {
+    color: red; /* La couleur change pour indiquer que le like est actif */
+}
 /* Lightbox  */
 .lightbox {
     position: fixed;
