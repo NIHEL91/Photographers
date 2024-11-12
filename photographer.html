@@ -36,15 +36,15 @@
 
     </main>
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-label="image lightbox" role="dialog" >
+    <div id="lightbox" class="lightbox" aria-label="image lightbox" role="dialog" aria-live="polite" >
         <span class="close-lightbox" aria-label="Fermer la LightBox"aria-label="Image précédente" role="button">    
             <i class="fa-solid fa-xmark"></i>
         </span>
 
         <span  id="prev-btn" class="prev-lightbox"  aria-label="Image précédente" role="button" tabindex="0"><</span>
         <div class="mediaImgVid">
-          <img class="lightbox-content" id="lightbox-img">
-          <video class="lightbox-content" id="lightbox-video">
+          <img class="lightbox-content" id="lightbox-img" alt="Image photographe" >
+          <video class="lightbox-content" id="lightbox-video" alt="Video">
             <source src="" type="video/webm" />
           </video>      
           <h2 id="lightbox-title" class="title"></h2>
@@ -65,25 +65,40 @@
               <form id="myForm">
                 <div class="formData">
                   <label class="text-label" for="first" id="labelFirstName">Prénom</label>
-                  <input class="text-control" type="text" id="first" name="first" aria-labelledby="labelFirstName">
-                  <span class="error" id="errorFirst">Le prénom doit contenir au moins 2 caractères.</span>
-                </div>
+                  <input class="text-control" type="text" id="first" name="first"
+                  aria-labelledby="labelFirstName" 
+                  aria-required="true" 
+                  aria-describedby="errorFirst">
+                  <span class="error" id="errorFirst" role="alert" aria-live="polite">
+                    Le prénom doit contenir au moins 2 caractères.
+                  </span>
+                  </div>
                 <div class="formData">
                   <label class="text-label" for="last"  id="labellastName">Nom</label>
-                  <input class="text-control" type="text" id="last" name="last" aria-labelledby="labellastName">
-                  <span class="error" id="errorLast">Le nom doit contenir au moins 2 caractères.</span>
-                </div>
-                <div class="formData">
-                  <label class="text-label" for="email" id="labelmail">E-mail</label>
-                  <input class="text-control" type="email" id="email" name="email" aria-required="true" aria-labelledby="labelmail">
-                  <span class="error" id="errorEmail">Veuillez entrer une adresse email valide.</span>
-                </div>
+                  <input class="text-control" type="text" id="last" name="last"
+                  aria-labelledby="labellastName" 
+                  aria-required="true" 
+                  aria-describedby="errorLast">
+                  <span class="error" id="errorLast" role="alert" aria-live="polite">
+                    Le nom doit contenir au moins 2 caractères.
+                </span>
+                  </div>
+                  <div class="formData">
+                    <label class="text-label" for="email" id="labelmail">E-mail</label>
+                    <input class="text-control" type="email" id="email" name="email" 
+                           aria-labelledby="labelmail" 
+                           aria-required="true" 
+                           aria-describedby="errorEmail">
+                    <span class="error" id="errorEmail" role="alert" aria-live="polite">
+                        Veuillez entrer une adresse email valide.
+                    </span>
+                  </div>
                 <div class="formData">
                   <label class="text-label" for="message" id="labelmessage" >Votre message</label>
                   <input class="text-control" ty
                   pe="date" id="message" name="message" aria-required="true" aria-labelledby="labelmessage">
                 </div>
-                <button class="btn-submit">Envoyer</button>
+                <button class="btn-submit" aria-label="Envoyer le formulaire">Envoyer</button>
               </form>
             </div>
           </div>

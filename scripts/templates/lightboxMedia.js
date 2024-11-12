@@ -3,6 +3,7 @@ import { getMediaById } from '../utils/media.js';
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxVideo = document.getElementById('lightbox-video');
+const closeLightboxBtn = document.querySelector('.close-lightbox');
 
 let currentIndex = -1;
 // Fonction pour ouvrir la lightbox
@@ -21,13 +22,18 @@ let currentIndex = -1;
     // Mettre à jour l'affichage de la lightbox
     updateLightbox(src, mediaType);
     lightbox.classList.add('active-lightbox'); // Affiche la lightbox
+    lightbox.setAttribute('aria-hidden', 'false'); // Assurer l'accessibilité
+    closeLightboxBtn.focus(); // Met le focus sur la croix pour commencer la navigation
 }
+
 
 
 // Fonction pour fermer la lightbox
 function closeLightbox() {
     // Retire la classe pour masquer la lightbox
     lightbox.classList.remove('active-lightbox');
+    lightbox.setAttribute('aria-hidden', 'true'); // Accessibilité
+
  
      lightboxImg.src = '';
      lightboxImg.style.display = 'none'; // Masquer l'image
@@ -36,6 +42,7 @@ function closeLightbox() {
      lightboxVideo.style.display = 'none'; // Masquer la vidéo
 
      lightboxVideo.pause(); // Mettre la vidéo en pause lorsqu'on ferme la lightbox
+
 }
 
 // Événement pour fermer la lightbox en cliquant sur la croix
@@ -43,6 +50,7 @@ document.querySelector('.close-lightbox').addEventListener('click', closeLightbo
 
 // Fonction pour mettre à jour la lightbox
 function updateLightbox(src, mediaType) {
+    
     if (mediaType === 'image') {
         lightboxImg.src = src; // Afficher l'image
         lightboxImg.style.display = 'block'; // Afficher l'image dans la lightbox
@@ -91,19 +99,17 @@ function getPreviousMedia() {
 // Ajouter des événements sur les boutons "Next" et "Previous"
 document.getElementById('next-btn').addEventListener('click', getNextMedia);
 document.getElementById('prev-btn').addEventListener('click', getPreviousMedia);
+closeLightboxBtn.addEventListener('click', closeLightbox);
 
-//accécibilité de lightbox 
-document.addEventListener('keydown', function(event) {
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox.style.display === 'block') {
-        if (event.key === 'ArrowLeft') {
-            getPreviousMedia(); // Fonction à définir pour afficher l'image précédente
-        } else if (event.key === 'ArrowRight') {
-            getNextMedia(); // Fonction à définir pour afficher l'image suivante
-        } else if (event.key === 'Escape') {
-            closeLightbox(); // Fonction à définir pour fermer la Lightbox
+//accessibilité  de lightbox 
+document.addEventListener('keydown', function (e) {
+    if (lightbox.classList.contains('active-lightbox')) {
+        if (e.key === 'ArrowRight') { // Flèche droite
+            getNextMedia();
+        } else if (e.key === 'ArrowLeft') { // Flèche gauche
+            getPreviousMedia();
+        } else if (e.key === 'Escape') { // Échap
+            closeLightbox();
         }
     }
 });
-
-

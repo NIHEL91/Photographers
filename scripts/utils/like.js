@@ -8,10 +8,13 @@ let totalLikes= 0;
         const likesCountElement = document.querySelector(".totalLikesCount");
         likesCountElement.innerHTML = `
             ${totalLikes}
-            <i class="fa fa-heart"></i>
-            
+ ${totalLikes}
+            <i class="fa fa-heart" role="button" aria-label="Total des likes" tabindex="0"></i>
+                   
         `;
-    }
+      
+}
+    
     // Fonction pour calculer et afficher les likes
     export async function calculateAndDisplayLikes(media, photographers) {
         const photographContainer = document.querySelector(".photographer-container");
@@ -27,7 +30,14 @@ let totalLikes= 0;
             const likesCountElement = document.querySelector(".totalLikesCount");
             likesCountElement.textContent = totalLikes;
         });
-
+ // Ajout de l'événement d'accessibilité sur chaque icône de like
+ const likeIcons = document.querySelectorAll('.fa-heart');
+ likeIcons.forEach(icon => {
+     icon.addEventListener('click', incrementLikes);
+     icon.addEventListener('keydown', (event) => {
+         if (event.key === 'Enter') incrementLikes(event);
+     });
+ });
         const totalLikesCount = document.querySelector(".totalLikesCount");
         const priceElement = document.querySelector(".price");
         
@@ -43,3 +53,13 @@ let totalLikes= 0;
     
         }
 
+
+// Fonction pour incrémenter les likes
+function incrementLikes(event) {
+    totalLikes += 1;
+    const likesCountElement = document.querySelector(".totalLikesCount");
+    likesCountElement.innerHTML = `
+        ${totalLikes}
+        <i class="fa fa-heart" role="button" aria-label="Total des likes" tabindex="0"></i>
+    `;
+}

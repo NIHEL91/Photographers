@@ -1,13 +1,7 @@
 // Imporation de la fonction depuis le fichier photgrapher.js
 import { photographerTemplate } from '../templates/photographer.js';
-import { displayModal } from '../utils/contactForm.js';
+import { getPhotographers } from '../utils/data.js';
 
-//Récupérer les données du fichier Json 
- export async function getPhotographers() {
-    const response = await fetch("../../data/photographers.json");
-    const photographers = await response.json();
-    return photographers;
-}
 
 //afficher les phorographers
 export async function displayData(photographers) {
@@ -26,7 +20,6 @@ async function init() {
     const {photographers} = await getPhotographers();//déstructuration d'objets (photographers) (pour obtenier les données)
     displayData(photographers); //(Affiche les données des photographes) 
 }
-
 // pour démarrer le processus de récupération et d'affichage
-init();
-displayModal();    
+init(); 
+

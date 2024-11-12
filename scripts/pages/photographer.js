@@ -1,11 +1,10 @@
 import { getMediaById, sortMedia, setMediaById} from '../utils/media.js';
-import { getPhotographers } from '../pages/index.js';
-import { photographerTemplate } from '../templates/photographer.js';
+import { getPhotographers } from '../utils/data.js';
+import { photographerHeaderTemplate } from '../templates/photographer.js';
 import { displayDataMedia } from '../utils/media.js';
 import { calculateAndDisplayLikes } from '../utils/like.js';
 import { setupForm } from '../utils/contactForm.js';
 
-//let mediaById = [];
 
 // Récupérer les médias
 export async function getMedia() {
@@ -18,11 +17,11 @@ export async function getMedia() {
     
     console.log('Affichage media :', filteredMedia);
     
-    // Utiliser la fonction setter pour mettre à jour mediaById
-    setMediaById(filteredMedia);
-    return filteredMedia;
-
+// Utiliser la fonction setter pour mettre à jour mediaById
+setMediaById(filteredMedia);
+return filteredMedia;
 }
+
 // Pour récupérer le ID depuis l'URL
 export function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
@@ -41,37 +40,34 @@ document.querySelector(".options").addEventListener("change", function(event) {
 
 // Afficher les détails du photographe
 export async function displayPhotographerDetails() {
-    const { photographerId } = getQueryParams();
-    const data = await getPhotographers();
-    const photographer = data.photographers.find(p => p.id === photographerId);
+    const { photographerId } = getQueryParams();  // Récupérer l'ID du photographe depuis l'URL
+    const data = await getPhotographers();  // Récupérer les données des photographes
+    const photographer = data.photographers.find(p => p.id === photographerId);  // Trouver le photographe par son ID
 
     if (photographer) {
+        // Utilisez `photographerHeaderTemplate` pour créer le contenu spécifique au photographe
         const photographHeader = document.querySelector(".photograph-header");
-        const photographerModel = photographerTemplate(photographer);
-        const photographerCardDOM = photographerModel.getHeaderDOM();
-        photographHeader.appendChild(photographerCardDOM);
-        //const modalTitle = document.getElementById("modalTitle");
-        //modalTitle.innerHTML = `<span>Contactez-moi</span><br><span>${photographer.name}</span>`;
-    
-        
+        const photographerHeaderModel = photographerHeaderTemplate(photographer); // Modèle spécifique au photographe
+        const photographerHeaderDOM = photographerHeaderModel.getHeaderDOM();  // Récupérer le DOM du modèle
+        photographHeader.appendChild(photographerHeaderDOM);  // Ajouter le contenu au DOM
     } else {
         console.error('Photographer not found');
     }
+
     return photographer;
 }
 
 
 // Fonction d'initialisation
-
-
 export async function init() {
     
     const media = await getMedia(); // Récupération des médias
     const photographer = await displayPhotographerDetails(); // Récupération du photographe
+    const modalTitle = document.getElementById("modalTitle");
+    modalTitle.innerHTML = `<span>Contactez-moi</span><br><span>${photographer.name}</span>`;
     calculateAndDisplayLikes(media, photographer); // Passez l'objet 'photographer' ici
     displayDataMedia(media); // Affichage des médias
     setupForm();
-
-
 }
+
 init(); 

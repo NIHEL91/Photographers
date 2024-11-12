@@ -4,6 +4,9 @@ const modalBtn = document.querySelectorAll(".contact_button"); // Bouton(s) pour
 const closeStar = document.querySelector(".closeStar"); // Bouton pour fermer la modale
 const myForm = document.getElementById("myForm"); // Le formulaire
 const overlay = document.getElementById("overlay");
+const firstField = document.getElementById("first");
+const lastField = document.getElementById("last");
+const emailField = document.getElementById("email");
 
 // Fonction pour lancer la modale de formulaire
 
@@ -11,19 +14,33 @@ export async function displayModal(photographers) {
     //fais défiler jusqu'a la modale (l'afficher )
     overlay.style.display = "block"; // Affiche l'overlay
     modal.style.display = "block";
-    modal.scrollIntoView({ behavior: "smooth" });
-}
+    modal.scrollIntoView({ behavior: "smooth"});
+    firstField.focus(); // Place le focus sur le premier champ du formulaire
+    document.addEventListener("keydown", handleEscapeKey);
 
+}
 // Fonction pour fermer la modale
 function closeModal() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none"; // Masque l'overlay
   modal.style.display = "none"; // Masque la modale
+
 }
 
+// Retire l'écouteur de la touche Échap aprés la fermeture du modale 
+document.addEventListener("keydown", EscapeKey);
+
+// Gère la fermeture avec la touche Échap
+function EscapeKey(event) {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+}
 // Réinitialise les champs du formulaire
 function resetForm() {
     myForm.reset(); 
+    resetFieldStyles();
+
 }
 
 // Ajouter des événements pour ouvrir la modale
