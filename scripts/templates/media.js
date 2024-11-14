@@ -66,16 +66,15 @@ export function mediaTemplate(data) {
         icon.tabIndex = 0; // Rendre focalisable
 
        
-        
-        // Ajouter un événement au clic pour incrémenter les likes
+        //Ajouter un événement au clic pour incrémenter les likes
         icon.addEventListener('click', () => {
             if (!icon.classList.contains('liked')) {
-
+                
             existLikes += 1;
             likeCount.textContent = existLikes;
             icon.classList.add('liked');
+            updateTotalLikes();
 
-           updateTotalLikes();
             } });
             
            icon.addEventListener('keydown', (e) => {
@@ -107,21 +106,15 @@ let Image = function(image) {
             let mediaImg = document.createElement( 'img' );
             mediaImg.setAttribute("src", this.src);
             mediaImg.classList.add('image-media'); // Ajoute une classe pour appliquer le CSS
-            mediaImg.tabIndex = 0; // Rendre focalisable
 
             mediaImg.addEventListener('click', () => {
                 openLightbox(this.src, 'image');
-            });
-            mediaImg.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter') {
-                    openLightbox(this.src, 'image');
-                }
-            });
-    
-            return mediaImg;
-    };
-};
 
+            });
+            return mediaImg;
+
+    }
+}
 let Video = function(video) {
     this.src = `assets/media/${video}`;
     this.getDOM = function() {
@@ -129,17 +122,10 @@ let Video = function(video) {
         mediaVid.setAttribute("src", this.src);
         mediaVid.setAttribute("controls", "true"); // Ajouter des contrôles vidéo
         mediaVid.classList.add('video-media'); // Ajoute une classe pour appliquer le CSS
-        mediaVid.tabIndex = 0; // Rendre focalisable
         // Ajouter un événement au clic pour ouvrir la lightbox
         mediaVid.addEventListener('click', () => {
-            openLightbox(this.src, 'video');
+            openLightbox(this.src,'video');//ajouter l'argument  type (video)
         });
-        mediaVid.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                openLightbox(this.src, 'video');
-            }
-        });
-
         return mediaVid;
-    };
-};
+    }
+}
