@@ -1,16 +1,13 @@
-import { getMediaById, sortMedia, setMediaById} from '../utils/media.js';
+import { getMediaById, sortMedia, setMediaById, displayDataMedia} from '../utils/media.js';
 import { getPhotographers } from '../utils/data.js';
-import { photographerHeaderTemplate } from '../templates/photographer.js';
-import { displayDataMedia } from '../utils/media.js';
+import { photographerTemplate } from '../templates/photographer.js';
 import { calculateAndDisplayLikes } from '../utils/like.js';
 import { setupForm } from '../utils/contactForm.js';
 
 
 // Récupérer les médias
-export async function getMedia() {
-    const response = await fetch("../../data/photographers.json");
-    const data = await response.json();
-    const media = data.media;
+export async function getMediaByIdFromJson() {
+    const { media } =  await getPhotographers();
     const { photographerId } = getQueryParams(); // Obtenir l'ID du photographe depuis l'URL
     
     const filteredMedia = media.filter(mediaItem => mediaItem.photographerId === photographerId);
@@ -45,9 +42,9 @@ export async function displayPhotographerDetails() {
     const photographer = data.photographers.find(p => p.id === photographerId);  // Trouver le photographe par son ID
 
     if (photographer) {
-        // Utilisez `photographerHeaderTemplate` pour créer le contenu spécifique au photographe
+      
         const photographHeader = document.querySelector(".photograph-header");
-        const photographerHeaderModel = photographerHeaderTemplate(photographer); // Modèle spécifique au photographe
+        const photographerHeaderModel = photographerTemplate(photographer); // Modèle spécifique au photographe
         const photographerHeaderDOM = photographerHeaderModel.getHeaderDOM();  // Récupérer le DOM du modèle
         photographHeader.appendChild(photographerHeaderDOM);  // Ajouter le contenu au DOM
     } else {
@@ -60,14 +57,11 @@ export async function displayPhotographerDetails() {
 
 // Fonction d'initialisation
 export async function init() {
-    
-    const media = await getMedia(); // Récupération des médias
-    const photographer = await displayPhotographerDetails(); // Récupération du photographe
-    const modalTitle = document.getElementById("modalTitle");
-    modalTitle.innerHTML = `<span>Contactez-moi</span><br><span>${photographer.name}</span>`;
-    calculateAndDisplayLikes(media, photographer); // Passez l'objet 'photographer' ici
+    const photographer = await displayPhotographerDetails(); // Récupération du photographe 
+    setupForm(photographer);
+    const media = await getMediaByIdFromJson(); // Récupération des médias  
     displayDataMedia(media); // Affichage des médias
-    setupForm();
+    calculateAndDisplayLikes(media, photographer); // Passez l'objet 'photographer' ici
 }
 
 init(); 

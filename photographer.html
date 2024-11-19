@@ -1,121 +1,119 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+<html lang="fr">
 
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <a href="index.html">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header>
+    <a href="index.html">
       <img src="assets/images/logo.png" class="logo" />
-      </a>
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button">Contactez-moi</button>
-      </div>
-
-          <div class="dropdown-container">
-            <label class="trie" for="options">Trier par</label>
-            <select class="options" name="options">
-            <option value="popularity">Popularité</option>
-            <option value="date">Date</option>
-            <option value="title">Titre</option>
-            </select>
-          </div>
-   
-      <div class="photographer-container">
-      
-      </div>
-
-    </main>
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-label="image lightbox" role="dialog" aria-live="polite" >
-        <span class="close-lightbox" aria-label="Fermer la LightBox"aria-label="Image précédente" role="button">    
-            <i class="fa-solid fa-xmark"></i>
-        </span>
-
-        <span  id="prev-btn" class="prev-lightbox"  aria-label="Image précédente" role="button" tabindex="0"><</span>
-        <div class="mediaImgVid">
-          <img class="lightbox-content" id="lightbox-img" alt="Image photographe" >
-          <video class="lightbox-content" id="lightbox-video" alt="Video">
-            <source src="" type="video/webm" />
-          </video>      
-          <h2 id="lightbox-title" class="title"></h2>
-        </div>
-        <span id="next-btn" class="next-lightbox" aria-label="Image suivante" role="button"  tabindex="0">></span>
+    </a>
+  </header>
+  <main id="main">
+    <div class="photograph-header">
+      <button class="contact_button">Contactez-moi</button>
     </div>
 
-    <div id="overlay"></div>
-    <div id="contact_modal"> 
-      <div class="modal" role="dialog" aria-describedby="modalTitle">
-        <header>
-          <h2 id="modalTitle"></h2>
-        </header>
-            <span class="closeStar">
-              <img src="assets/icons/close.svg"  alt="Fermer la fenêtre" />
+    <div class="dropdown-container">
+      <label class="trie" for="options">Trier par</label>
+      <select class="options" name="options">
+        <option value="popularity">Popularité</option>
+        <option value="date">Date</option>
+        <option value="title">Titre</option>
+      </select>
+    </div>
+
+    <div class="photographer-container">
+
+    </div>
+
+  </main>
+  <!-- Lightbox -->
+  <dialog id="lightbox" class="lightbox" aria-label="image lightbox">
+    <button class="close-lightbox" aria-label="Fermer la LightBox" aria-label="Image précédente">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <button id="prev-btn" class="prev-lightbox" aria-label="Image précédente" tabindex="0"> <</button>
+     
+        <div class="mediaImgVid">
+          <img class="lightbox-content" id="lightbox-img" alt="">
+          <video class="lightbox-content" id="lightbox-video">
+            <source src="" type="video/webm" />
+          </video>
+          <h2 id="lightbox-title" class="title"></h2>
+        </div>
+        <button id="next-btn" class="next-lightbox" aria-label="Image suivante" tabindex="0">></button>
+  </dialog>
+
+  <div id="overlay"></div>
+  <div id="contact_modal">
+    <dialog class="modal" aria-describedby="modalTitle">
+      <header>
+        <h2 id="modalTitle"></h2>
+      </header>
+      <span class="closeStar">
+        <img src="assets/icons/close.svg" alt="Fermer la fenêtre" />
+      </span>
+      <div class="modal-body">
+        <form id="myForm">
+          <div class="formData">
+            <label class="text-label" for="first" id="labelFirstName">Prénom</label>
+            <input class="text-control" type="text" id="first" name="first" aria-labelledby="labelFirstName"
+              aria-required="true" aria-describedby="errorFirst">
+            <span class="error" id="errorFirst" role="alert" aria-live="polite">
+              Le prénom doit contenir au moins 2 caractères.
             </span>
-            <div class="modal-body">
-              <form id="myForm">
-                <div class="formData">
-                  <label class="text-label" for="first" id="labelFirstName">Prénom</label>
-                  <input class="text-control" type="text" id="first" name="first"
-                  aria-labelledby="labelFirstName" 
-                  aria-required="true" 
-                  aria-describedby="errorFirst">
-                  <span class="error" id="errorFirst" role="alert" aria-live="polite">
-                    Le prénom doit contenir au moins 2 caractères.
-                  </span>
-                  </div>
-                <div class="formData">
-                  <label class="text-label" for="last"  id="labellastName">Nom</label>
-                  <input class="text-control" type="text" id="last" name="last"
-                  aria-labelledby="labellastName" 
-                  aria-required="true" 
-                  aria-describedby="errorLast">
-                  <span class="error" id="errorLast" role="alert" aria-live="polite">
-                    Le nom doit contenir au moins 2 caractères.
-                </span>
-                  </div>
-                  <div class="formData">
-                    <label class="text-label" for="email" id="labelmail">E-mail</label>
-                    <input class="text-control" type="email" id="email" name="email" 
-                           aria-labelledby="labelmail" 
-                           aria-required="true" 
-                           aria-describedby="errorEmail">
-                    <span class="error" id="errorEmail" role="alert" aria-live="polite">
-                        Veuillez entrer une adresse email valide.
-                    </span>
-                  </div>
-                <div class="formData">
-                  <label class="text-label" for="message" id="labelmessage" >Votre message</label>
-                  <input class="text-control" ty
-                  pe="date" id="message" name="message" aria-required="true" aria-labelledby="labelmessage">
-                </div>
-                <button class="btn-submit" aria-label="Envoyer le formulaire">Envoyer</button>
-              </form>
-            </div>
           </div>
-        </div>
-        <div id="total-likes">
-          <span class="totalLikesCount">0          
-            <i class="fa fa-heart"></i>
-          </span>
-          <span class="price">0</span>
-        </div>
-
+          <div class="formData">
+            <label class="text-label" for="last" id="labellastName">Nom</label>
+            <input class="text-control" type="text" id="last" name="last" aria-labelledby="labellastName"
+              aria-required="true" aria-describedby="errorLast">
+            <span class="error" id="errorLast" role="alert" aria-live="polite">
+              Le nom doit contenir au moins 2 caractères.
+            </span>
+          </div>
+          <div class="formData">
+            <label class="text-label" for="email" id="labelmail">E-mail</label>
+            <input class="text-control" type="email" id="email" name="email" aria-labelledby="labelmail"
+              aria-required="true" aria-describedby="errorEmail">
+            <span class="error" id="errorEmail" role="alert" aria-live="polite">
+              Veuillez entrer une adresse email valide.
+            </span>
+          </div>
+          <div class="formData">
+            <label class="text-label" for="message" id="labelmessage">Votre message</label>
+            <input class="text-control" ty pe="date" id="message" name="message" aria-required="true"
+              aria-labelledby="labelmessage">
+          </div>
+          <button class="btn-submit" aria-label="Envoyer le formulaire">Envoyer</button>
+        </form>
       </div>
-      
-    <script   type="module" src="/scripts/pages/photographer.js"></script>
-    <script   type="module" src="/scripts/templates/media.js"></script>
+  </div>
+  </div>
+  <div id="total-likes">
+    <span class="totalLikesCount">0
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="price">0</span>
+  </div>
 
-    <script  type="module"  src="/scripts/utils/contactForm.js"></script> <!--type module indique au navigateur que le fichier est un module ecpascript permet l'utilisation de import et export--> 
-    
-  </body>
+  </dialog>
+
+  <script type="module" src="/scripts/pages/photographer.js"></script>
+  <script type="module" src="/scripts/templates/media.js"></script>
+
+  <script type="module" src="/scripts/utils/contactForm.js"></script>
+
+</body>
+
 </html>

@@ -61,6 +61,8 @@ body {
 .image-media, .video-media {
     Width: 350px;
     Height: 300px;
+    object-fit: cover;
+
 }
 .image-photographe {
     height: 200px;

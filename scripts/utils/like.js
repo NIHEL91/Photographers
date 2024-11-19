@@ -37,8 +37,8 @@ let totalLikes= 0;
             <i class="fa fa-heart"></i>
             `;
         
-            // Mettez à jour le contenu du span price avec le prix
-            priceElement.textContent = `${photographers.price} €/jour`;
+        // Mettez à jour le contenu du span price avec le prix
+        priceElement.textContent = `${photographers.price} €/jour`;
       
     
         }

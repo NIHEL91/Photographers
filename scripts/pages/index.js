@@ -5,12 +5,14 @@ import { getPhotographers } from '../utils/data.js';
 
 //afficher les phorographers
 export async function displayData(photographers) {
-    const photographersSection = document.querySelector(".photographer_section"); // on va ajouter les cartesphotographes dans cette classe
+    // on va ajouter les cartes photographes dans cette classe
+    const photographersSection = document.querySelector(".photographer_section");
     photographers.forEach((photographer) => {
         // Crée un modèle pour chaque photographe
         const photographerModel = photographerTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
-        photographersSection.appendChild(userCardDOM);// ajouter les élements de la méthode userCardDom  à la section (photographer_section)
+        // ajouter les élements de la méthode userCardDom  à la section (photographer_section)
+        photographersSection.appendChild(userCardDOM);
     });
 }
 

@@ -1,24 +1,21 @@
 import { getMediaById } from '../utils/media.js';
-
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxVideo = document.getElementById('lightbox-video');
 const closeLightboxBtn = document.querySelector('.close-lightbox');
-
 let currentIndex = -1;
+
 // Fonction pour ouvrir la lightbox
- export function openLightbox(src, mediaType) {
+export function openLightbox(src, mediaType) {
     const mediaSorted = getMediaById();
     currentIndex = mediaSorted.findIndex(media => {
         const filePath = `assets/media/${media.image || media.video}`;
         return filePath === src;
     });
     const currentMedia = mediaSorted[currentIndex];
-
     // Mettre à jour le titre avec le titre du média courant
     const lightboxTitle = document.getElementById('lightbox-title');
     lightboxTitle.textContent = currentMedia.title;
-
     // Mettre à jour l'affichage de la lightbox
     updateLightbox(src, mediaType);
     lightbox.classList.add('active-lightbox'); // Affiche la lightbox
@@ -26,22 +23,18 @@ let currentIndex = -1;
     closeLightboxBtn.focus(); // Met le focus sur la croix pour commencer la navigation
 }
 
-
-
 // Fonction pour fermer la lightbox
 function closeLightbox() {
     // Retire la classe pour masquer la lightbox
     lightbox.classList.remove('active-lightbox');
     lightbox.setAttribute('aria-hidden', 'true'); // Accessibilité
+    lightboxImg.src = '';
+    lightboxImg.style.display = 'none'; // Masquer l'image
 
- 
-     lightboxImg.src = '';
-     lightboxImg.style.display = 'none'; // Masquer l'image
+    lightboxVideo.src = '';
+    lightboxVideo.style.display = 'none'; // Masquer la vidéo
 
-     lightboxVideo.src = '';
-     lightboxVideo.style.display = 'none'; // Masquer la vidéo
-
-     lightboxVideo.pause(); // Mettre la vidéo en pause lorsqu'on ferme la lightbox
+    lightboxVideo.pause(); // Mettre la vidéo en pause lorsqu'on ferme la lightbox
 
 }
 
@@ -60,9 +53,7 @@ function updateLightbox(src, mediaType) {
         lightboxVideo.src = src; // Afficher la vidéo
         lightboxVideo.style.display = 'block'; // Afficher la vidéo dans la lightbox     
         lightboxVideo.controls = true; // Ajout de l'attribut controls
-
-
-        lightboxImg.style.display = 'none'; // Afficher l'image dans la lightbox
+        lightboxImg.style.display = 'none'; //masquer l'image a l'ouverture de video 
 
     }
 }
@@ -70,7 +61,6 @@ function updateLightbox(src, mediaType) {
 // Affiche le média suivant
 function getNextMedia() {
     const mediaSorted = getMediaById();
-  
     const nextIndex = (currentIndex + 1) % mediaSorted.length;
     currentIndex = nextIndex;
     const nextMedia = mediaSorted[currentIndex];
