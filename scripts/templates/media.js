@@ -123,10 +123,11 @@ let Video = function(video) {
     // Définir la source de la vidéo à partir du chemin fourni
     this.src = `assets/media/${video}`;
     this.getDOM = function() {
+        // Créer l'élément vidéo
         let mediaVid = document.createElement('video');
         mediaVid.setAttribute("src", this.src);
-        mediaVid.setAttribute("controls", "true"); // Ajouter des contrôles vidéo
-        mediaVid.classList.add('video-media'); 
+        mediaVid.setAttribute("controls", "true"); // Ajouter des contrôles vidéo (lecture, pause, volume, etc.)
+        mediaVid.classList.add('video-media');    // Ajouter une classe CSS pour styliser la vidéo
         mediaVid.addEventListener('click', () => {
             openLightbox(this.src,'video');//ajouter l'argument  type (video)
             openLightbox(this.src, 'video');

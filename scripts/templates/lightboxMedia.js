@@ -8,7 +8,7 @@ let currentIndex = -1;
 // Fonction pour ouvrir la lightbox
 export function openLightbox(src, mediaType) {
     const mediaSorted = getMediaById();
-    currentIndex = mediaSorted.findIndex(media => {
+    currentIndex = mediaSorted.findIndex(media => {// pour trouver l'index du premier élément d'un tableau
         const filePath = `assets/media/${media.image || media.video}`;
         return filePath === src;
     });

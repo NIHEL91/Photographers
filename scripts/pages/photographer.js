@@ -9,14 +9,11 @@ import { setupForm } from '../utils/contactForm.js';
 export async function getMediaByIdFromJson() {
     const { media } =  await getPhotographers();
     const { photographerId } = getQueryParams(); // Obtenir l'ID du photographe depuis l'URL
-    
     const filteredMedia = media.filter(mediaItem => mediaItem.photographerId === photographerId);
-    
     console.log('Affichage media :', filteredMedia);
-    
-// Utiliser la fonction setter pour mettre à jour mediaById
-setMediaById(filteredMedia);
-return filteredMedia;
+    // Utiliser la fonction setter pour mettre à jour mediaById
+    setMediaById(filteredMedia);
+    return filteredMedia;
 }
 
 // Pour récupérer le ID depuis l'URL
@@ -40,9 +37,7 @@ export async function displayPhotographerDetails() {
     const { photographerId } = getQueryParams();  // Récupérer l'ID du photographe depuis l'URL
     const data = await getPhotographers();  // Récupérer les données des photographes
     const photographer = data.photographers.find(p => p.id === photographerId);  // Trouver le photographe par son ID
-
     if (photographer) {
-      
         const photographHeader = document.querySelector(".photograph-header");
         const photographerHeaderModel = photographerTemplate(photographer); // Modèle spécifique au photographe
         const photographerHeaderDOM = photographerHeaderModel.getHeaderDOM();  // Récupérer le DOM du modèle
@@ -50,7 +45,6 @@ export async function displayPhotographerDetails() {
     } else {
         console.error('Photographer not found');
     }
-
     return photographer;
 }
 
