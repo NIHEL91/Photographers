@@ -2,5 +2,5 @@
 
 ## Démarrer le projet
 
-Ouvrir le live server aprés
-Ouvrir le fichier index.html
+Ouvrir le live server puis
+ouvrir le fichier index.html
