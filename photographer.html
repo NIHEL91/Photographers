@@ -15,22 +15,24 @@
 <body>
   <header>
     <a href="index.html">
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="logo"/>
     </a>
   </header>
   <main id="main">
     <div class="photograph-header">
       <button class="contact_button">Contactez-moi</button>
     </div>
-
+<!--liset déroulante--> 
     <div class="dropdown-container">
       <label class="trie" for="options">Trier par</label>
-      <select class="options" name="options">
-        <option value="popularity">Popularité</option>
+      <select id="options" class="options" name="options">
+        <option value="trier" selected></option>
+        <option value="popularity" >Popularité</option>
         <option value="date">Date</option>
         <option value="title">Titre</option>
       </select>
     </div>
+  
 
     <div class="photographer-container">
 
@@ -38,13 +40,12 @@
 
   </main>
   <!-- Lightbox -->
-  <dialog id="lightbox" class="lightbox" aria-label="image lightbox">
-    <button class="close-lightbox" aria-label="Fermer la LightBox" aria-label="Image précédente">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+  <div id="lightbox" class="lightbox" aria-label="image lightbox" role="dialog" aria-live="polite">
+    <span class="close-lightbox" aria-label="Fermer la LightBox" aria-label="Image précédente" role="button">
+      <strong class="fa-solid fa-xmark"></strong>
+    </span>
 
-    <button id="prev-btn" class="prev-lightbox" aria-label="Image précédente" tabindex="0"> <</button>
-     
+    <span id="prev-btn" class="prev-lightbox" aria-label="Image précédente" role="button" tabindex="0"><</span>
         <div class="mediaImgVid">
           <img class="lightbox-content" id="lightbox-img" alt="">
           <video class="lightbox-content" id="lightbox-video">
@@ -52,23 +53,23 @@
           </video>
           <h2 id="lightbox-title" class="title"></h2>
         </div>
-        <button id="next-btn" class="next-lightbox" aria-label="Image suivante" tabindex="0">></button>
-  </dialog>
+        <span id="next-btn" class="next-lightbox" aria-label="Image suivante" role="button" tabindex="0">></span>
+  </div>
 
   <div id="overlay"></div>
   <div id="contact_modal">
-    <dialog class="modal" aria-describedby="modalTitle">
+    <div class="modal" role="dialog" aria-describedby="modalTitle">
       <header>
         <h2 id="modalTitle"></h2>
       </header>
       <span class="closeStar">
-        <img src="assets/icons/close.svg" alt="Fermer la fenêtre" />
+        <img src="assets/icons/close.svg" alt="" />
       </span>
       <div class="modal-body">
         <form id="myForm">
           <div class="formData">
             <label class="text-label" for="first" id="labelFirstName">Prénom</label>
-            <input class="text-control" type="text" id="first" name="first" aria-labelledby="labelFirstName"
+            <input class="text-control"  id="first" name="first" type="text"aria-labelledby="labelFirstName"
               aria-required="true" aria-describedby="errorFirst">
             <span class="error" id="errorFirst" role="alert" aria-live="polite">
               Le prénom doit contenir au moins 2 caractères.
@@ -76,7 +77,7 @@
           </div>
           <div class="formData">
             <label class="text-label" for="last" id="labellastName">Nom</label>
-            <input class="text-control" type="text" id="last" name="last" aria-labelledby="labellastName"
+            <input class="text-control" id="last" name="last" type="text"  aria-labelledby="labellastName"
               aria-required="true" aria-describedby="errorLast">
             <span class="error" id="errorLast" role="alert" aria-live="polite">
               Le nom doit contenir au moins 2 caractères.
@@ -98,21 +99,22 @@
           <button class="btn-submit" aria-label="Envoyer le formulaire">Envoyer</button>
         </form>
       </div>
-  </div>
+    </div>
   </div>
   <div id="total-likes">
     <span class="totalLikesCount">0
-      <i class="fa fa-heart"></i>
+      <strong class="fa fa-heart"></strong>
     </span>
     <span class="price">0</span>
   </div>
 
-  </dialog>
+  </div>
 
   <script type="module" src="/scripts/pages/photographer.js"></script>
   <script type="module" src="/scripts/templates/media.js"></script>
 
   <script type="module" src="/scripts/utils/contactForm.js"></script>
+  <!--type module indique au navigateur que le fichier est un module ecpascript permet l'utilisation de import et export-->
 
 </body>
 

@@ -1,9 +1,9 @@
- //Création les données de   la page de chaque photographe
+ //Création les données de chaque photographe
  export function photographerTemplate(data) {
     const { id, name, portrait, city, country, tagline, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
-
+    //Création de  la carte du chaque  photographe dans la page d'accueil 
     function getUserCardDOM() {
 
         const article = document.createElement('article');

@@ -7,13 +7,13 @@ const overlay = document.getElementById("overlay");
 const firstField = document.getElementById("first");
 
 // Fonction pour lancer la modale de formulaire
-export async function displayModal(photographers) {
+export async function displayModal() {
     //fais défiler jusqu'a la modale (l'afficher )
     overlay.style.display = "block"; // Affiche l'overlay
     modal.style.display = "block";
     modal.scrollIntoView({ behavior: "smooth"});
     firstField.focus(); // Place le focus sur le premier champ du formulaire
-    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener("keydown");
 
 }
 // Fonction pour fermer la modale

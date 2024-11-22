@@ -1,8 +1,9 @@
-import { getMediaById, sortMedia, setMediaById, displayDataMedia} from '../utils/media.js';
+import { setMediaById, displayDataMedia} from '../utils/media.js';
 import { getPhotographers } from '../utils/data.js';
 import { photographerTemplate } from '../templates/photographer.js';
 import { calculateAndDisplayLikes } from '../utils/like.js';
 import { setupForm } from '../utils/contactForm.js';
+
 
 
 // Récupérer les médias
@@ -10,7 +11,7 @@ export async function getMediaByIdFromJson() {
     const { media } =  await getPhotographers();
     const { photographerId } = getQueryParams(); // Obtenir l'ID du photographe depuis l'URL
     const filteredMedia = media.filter(mediaItem => mediaItem.photographerId === photographerId);
-    console.log('Affichage media :', filteredMedia);
+    //console.log('Affichage media :', filteredMedia);
     // Utiliser la fonction setter pour mettre à jour mediaById
     setMediaById(filteredMedia);
     return filteredMedia;
@@ -24,12 +25,6 @@ export function getQueryParams() {
     };
 }
 
-// Ajoute un écouteur d'événements pour le changement de sélection dans la liste déroulante
-document.querySelector(".options").addEventListener("change", function(event) {
-    const selectedOption = event.target.value;
-    const media = getMediaById();
-    sortMedia(selectedOption, media);
-});
 
 
 // Afficher les détails du photographe
@@ -47,6 +42,7 @@ export async function displayPhotographerDetails() {
     }
     return photographer;
 }
+
 
 
 // Fonction d'initialisation
